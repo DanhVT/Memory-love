@@ -1,0 +1,77 @@
+'use strict';
+
+var mongoClient = require('mongodb').MongoClient;
+var express = require('express');
+var path = require('path');
+var cors = require('cors');
+var bodyParser = require('body-parser');
+var config = require('./configs/config');
+var constant = require('./configs/constant');
+var engine = require('ejs-locals');
+var cors = require("cors");
+var cookieParser = require("cookie-parser");
+var logger = require('./libs/log');
+var utils = require('./helpers/utils');
+
+var app = express();
+var http = require('http').Server(app);
+
+const MONGO_DB_URL = 'mongodb://localhost:27017/memory';
+
+// Add middleware set up
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.engine('ejs', engine);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(cors());
+app.use(express.static(path.join(__dirname, "assets")));
+app.use(cookieParser());
+// Log request actions
+app.use((req, res, next) => {
+    _writeLog(req);
+    next();
+});
+
+// Add routes
+app.use(require('./configs/routes'));
+
+
+// connect to DB
+mongoClient.connect(MONGO_DB_URL, function (err, db) {
+    if (err) {
+        return logger.error("Cannot connect to DB uri: " + MONGO_DB_URL);
+    }
+
+    utils.global[constant.global.db] = db;
+
+    http.listen(config.server_port, function () {
+        logger.info('Listening on port ' + config.server_port + '...');
+    });
+
+});
+
+var _writeLog = function(req){
+    try {
+        var clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        var url = utils.format('%s://%s:%d%s', req.protocol, req.hostname, this.port, req.originalUrl);
+        var method = typeof (req.method) != 'undefined' ? req.method : null;
+
+        if (clientIp) {
+            logger.debug('IP ' + clientIp);
+        }
+
+        logger.debug(method + ' ' + url);
+
+        if (method == 'POST') {
+            logger.debug('DATA ' + JSON.stringify(req.body));
+        }
+
+    } catch (ex) {
+
+    }
+}
