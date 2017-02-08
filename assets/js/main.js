@@ -200,7 +200,5 @@ jQuery(document).ready(function($){
 			prevUrl = url;
 		}
 	}
-	
-
 });
 

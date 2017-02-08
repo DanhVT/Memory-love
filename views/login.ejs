@@ -8,23 +8,25 @@
     <style type="text/css">
         h1 a { background-image: url(/img/flame_big.png) !important; }
     </style>
+
+    <script type='text/javascript' src='/js/jquery.js'></script>  
 </head>
 <body class="login login-action-login wp-core-ui  locale-en-us">
     <div id="login">
 		<h1>
             <a href="https://wordpress.org/" title="Powered by WordPress">Tempo</a></h1>
-        <form name="loginform" id="loginform" action="http://demo.fuelpixels.com/tempo/wp-login.php" method="post">
+        <form name="loginform" id="loginform" action="/loginSubmit" method="post">
             <p>
-                <label for="user_login">Username<br />
-                <input type="text" name="log" id="user_login" class="input" value="" size="20" /></label>
+                <label for="user_login">Email<br />
+                <input type="text" name="email" id="user_login" class="input" value="" size="20" /></label>
             </p>
             <p>
                 <label for="user_pass">Password<br />
-                <input type="password" name="pwd" id="user_pass" class="input" value="" size="20" /></label>
+                <input type="password" name="password" id="user_pass" class="input" value="" size="20" /></label>
             </p>
                 <p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever"  /> Remember Me</label></p>
             <p class="submit">
-                <input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Log In" />
+                <input type="submit" name="wp-submit" class="button button-primary button-large" value="Log In" id="login-button" />
                 <input type="hidden" name="redirect_to" value="http://demo.fuelpixels.com/tempo/wp-admin/" />
                 <input type="hidden" name="testcookie" value="1" />
             </p>
@@ -49,5 +51,6 @@
 	<p id="backtoblog"><a href="/" title="Are you lost?">&larr; Back to Home</a></p>
     </div>
     <div class="clear"></div>
+    <script src="/js/user.js"></script>
 </body>    
 </html>

@@ -12,8 +12,8 @@ var constant = {
         user: 'User'
     },
     err_code: {
-        'e0001': 'e0001',   // database error
-        'e0002': 'e0002',   // no data in database
+        'e0001': 'Database error',   // database error
+        'e0002': 'System error',   // no data in database
         'e0003': 'Parameters are invalid',   // 'status' field is not 'pending' or 'latest'
         'e0004': 'Email is undefined',   // parameter is undefined
         'e0005': 'Email is empty',   // parameter is invalid

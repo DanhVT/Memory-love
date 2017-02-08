@@ -49,9 +49,18 @@ mongoClient.connect(MONGO_DB_URL, function (err, db) {
 
     utils.global[constant.global.db] = db;
 
-    http.listen(config.server_port, function () {
-        logger.info('Listening on port ' + config.server_port + '...');
+    var UserModel = require('./models/user');
+    UserModel.checkDefaultAdmin(function(err){
+        if(err) {
+            return logger.error("Cannot set default administrator");
+        }
+
+        http.listen(config.server_port, function () {
+            logger.info('Listening on port ' + config.server_port + '...');
+        });
     });
+
+    
 
 });
 

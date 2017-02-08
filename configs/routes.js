@@ -20,6 +20,6 @@ router.get('/login', function (req, res) {
 })
 
 //======================================
-router.post('/login', UserController.login);
+router.post('/loginSubmit', UserController.login);
 
 module.exports = router;
