@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title><%= title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/admin.css">
+    <style type="text/css">
+        h1 a { background-image: url(/img/flame_big.png) !important; }
+        .resultResponse.success{
+            background:#2ecc71;
+            }
+        .resultResponse.error{
+            background: #ff0000;
+        }
+    </style>
+    <script src="/js/jquery.js"></script>
+<head>
+<body>
+    <header>
+        <h1>Add post </h1>
+        <a href="/admin">Back to Dashboard</a>
+    </header>
+    <div class="main">
+        <form name="addPostForm" action="addSubmit" method="post" id="addPostForm">
+            <p>
+                <label>Title:</label>
+                <input type="text" name="title" >
+            </p>
+            <p>
+                <label>Time and Hour:</label>
+                <input type="text" name="time" >
+            </p>
+            <p>
+                <label>Content:</label>
+                <textarea cols= "70" rows = "10" name="content"></textarea>
+            </p>
+            <p>
+                <label>Emotion:</label>
+                <select name="emotion">
+                    <option selected="selected" value="">--Choose emotion--</option>
+                    <option value="0">Happy</option>
+                    <option value="1">Normal</option>
+                    <option value="2">Sad</option>
+                </select>
+            </p>
+            <p>
+                <input type="submit" value="Add" name="add" style="padding:10px; background:#71cf12">
+                <input type="hidden" name="idPost" value="sss" />
+            </p>
+        </form>
+        <div class="resultResponse" style="bottom:0; padding:10px; position:fixed; color:#fff; width: 100%; font-size:24px; text-align: center">
+        </div>
+    </div>  
+    <script src="/js/admin.js"></script>
+</body>
+</html>

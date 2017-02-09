@@ -96,5 +96,33 @@ Utils.isUnsignedInteger = function (str) {
     return /^[0-9]+$/.test(str);
 };
 
+/** 
+* Clean up all properties of an object 
+* @param {object} object 
+* @return {object}  
+*/
+Utils.cleanUp = function (object) {
+    if(Utils.isNotEmptyObject(object)) {
+        for (var el in object) {
+            if (typeof (object[el]) === 'object') {
+                Utils.cleanUp(object[el]);
+            }
+            else {
+                object[el] = undefined;
+                delete object[el];
+                Utils.cleanUp(object);
+            }
+        }
+    }
+    return object;
+}
 
+/** 
+* Check if is a not empty object.
+* @param {object} obj 
+* @return {object}  
+*/
+Utils.isNotEmptyObject = function(obj) {
+    return (typeof obj === 'object' && obj !== null && obj.constructor !== Array && Object.keys(obj).length > 0);
+}
 module.exports = Utils;

@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    $('#loginform').submit(function (e) {
+    $('#addPostForm').submit(function (event) {
         event.preventDefault();
         var $form = $(this),
             url = $form.attr('action'),
@@ -20,13 +20,8 @@ jQuery(document).ready(function ($) {
                 resultResponse.removeClass('success').addClass('error');
             }
             else {
-                resultResponse.empty().append("Login success!!! You will auto redirect to Dashboard");
+                resultResponse.empty().append("Add new post success!!!");
                 resultResponse.removeClass('error').addClass('success');
-
-                setTimeout(function () {
-                    window.location.href = '/admin';
-                }, 3 * 1000);
-
             }
         })
         .error(function (error) {

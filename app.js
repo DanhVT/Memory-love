@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var config = require('./configs/config');
 var constant = require('./configs/constant');
 var engine = require('ejs-locals');
+var session = require("express-session");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var logger = require('./libs/log');
@@ -17,7 +18,9 @@ var app = express();
 var http = require('http').Server(app);
 
 const MONGO_DB_URL = 'mongodb://localhost:27017/memory';
-
+const SESSION_NAME = 'EthereumTokenTool';
+const SESSION_SECRET = '1234567890qwertuiopasdfghjklzxcvbnm';
+const COOKIE_TIME = 6*60*60*1000;   // 6 hours
 // Add middleware set up
 app.use(cors());
 app.use(bodyParser.json());
@@ -36,6 +39,16 @@ app.use((req, res, next) => {
     _writeLog(req);
     next();
 });
+app.use(session({
+    name: SESSION_NAME,
+    secret: SESSION_SECRET,
+    cookie: {
+        expires: new Date(Date.now() + COOKIE_TIME),
+        maxAge: COOKIE_TIME
+    },
+    saveUninitialized: true,
+    resave: true
+}));
 
 // Add routes
 app.use(require('./configs/routes'));

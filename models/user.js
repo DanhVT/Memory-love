@@ -87,7 +87,10 @@ UserModel.findUser = function(email, password, callback) {
         if(userInfo.status == USER_AUTH_DISABLED) return callback(new CustomError('ACCOUNT_DISABLED', 'Account is disable.'));	// DISABLED
 
         if(userInfo.password != UserModel.generatePassword(password, userInfo.salt)) {
-            
+            return callback(constant.err_code.e0008);
+        }
+        else{
+            return callback(null, userInfo);
         }
     });
 };
