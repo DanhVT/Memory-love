@@ -46,5 +46,7 @@ router.get('/logout', UserController.logout);
 router.post('/loginSubmit', UserController.login);
 //======================================
 router.post('/admin/addSubmit', AdminController.addPost);
+//======================================
+router.post('/admin/addImagesSubmit', AdminController.addImages);
 
 module.exports = router;

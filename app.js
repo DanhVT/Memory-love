@@ -52,7 +52,7 @@ app.use(session({
 
 // Add routes
 app.use(require('./configs/routes'));
-
+utils.global[constant.global.uploadDir] = path.join(__dirname, "assets/uploads/");
 
 // connect to DB
 mongoClient.connect(MONGO_DB_URL, function (err, db) {
@@ -72,8 +72,6 @@ mongoClient.connect(MONGO_DB_URL, function (err, db) {
             logger.info('Listening on port ' + config.server_port + '...');
         });
     });
-
-    
 
 });
 

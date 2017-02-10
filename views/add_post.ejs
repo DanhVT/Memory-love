@@ -44,9 +44,19 @@
             </p>
             <p>
                 <input type="submit" value="Add" name="add" style="padding:10px; background:#71cf12">
-                <input type="hidden" name="idPost" value="sss" />
+                <input type="hidden" id="idPost" />
             </p>
         </form>
+        <div class="block uploadPanel">
+            <div class="uploadedImage">
+            
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"></div>
+            </div>
+            <button class="btn btn-lg upload-btn" type="button">Upload File</button>
+        </div>
+        <input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
         <div class="resultResponse" style="bottom:0; padding:10px; position:fixed; color:#fff; width: 100%; font-size:24px; text-align: center">
         </div>
     </div>  

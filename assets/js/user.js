@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
 
                 setTimeout(function () {
                     window.location.href = '/admin';
-                }, 3 * 1000);
+                }, 2 * 1000);
 
             }
         })

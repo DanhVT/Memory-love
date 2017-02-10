@@ -2,7 +2,9 @@
 
 var constant = {
     global: {
-        db: 'mongodb'
+        db: 'mongodb',
+        uploadDir:'',
+        postId: '',
     },
     status: {
         pending: 'pending',
