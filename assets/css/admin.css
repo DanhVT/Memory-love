@@ -3,15 +3,19 @@
     padding: 0;
 }
 
-header{
+sidebar{
     position:fixed;
+    top:left;
     top:0;
     padding:30px;
     border:1px solid #000;
-    width:100%
+    width:200px;
+
+    height: 500px;
 }
 .main{
-    margin: 140px ;
+    width:80%;
+    margin-left: 20%;
 }
 .block{
     padding:10px;
@@ -45,4 +49,8 @@ input[type=text]{
 }
 .uploadPanel{
     display: none
+}
+.uploadedImage img{
+    width:200px;
+    margin:10px;
 }

@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title><%= title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+<head>
+<body>
+    <div class="wrap">
+        <% if (typeof result != "undefined" ){   
+            if (typeof result.post != "undefined" ){ %>
+                <div class="block">
+                    <h3>Detail of post</h3>
+                    <p><b>Title:</b> <%= result.post.title %></p>
+                    <p><b>Content:</b><%= result.post.content %></p>
+                    <p><b>Emotion: </b><%= result.post.emotion %></p>
+                    <p><b>Time:</b> <%= result.post.time %></p>
+                </div>
+            <% } 
+            if (typeof result.images != "undefined" && result.images!= "" ){ %>
+                <div class="block">
+                    <% for(var j=0; j< result.images.length; j++) {%>
+                        <div class="image" style="float:left; margin-right:20px; padding:3px; border: 1px solid #323212">
+                            <img src="<%= result.images[j].url %>" style="width:100px"/>
+                            <button class="delete_image" data-id="<%= result.images[j]._id %>">x</button>
+                        </div>
+                    <% } %>
+                    <div style="clear:both"></div>
+                <div class="block uploadPanel" style="display:block">
+                    <div class="uploadedImage">
+                    
+                    </div>
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar"></div>
+                    </div>
+                    <button class="btn btn-lg upload-btn" type="button">Upload File</button>
+                </div>
+                <input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+                <input type="hidden" id="idPost" value="<%= result.post._id %>"/>
+                </div>  
+            <% }   
+         } %>    
+
+    </div>
+    <a href="/admin">Back to Dashbaord </a>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

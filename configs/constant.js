@@ -12,7 +12,8 @@ var constant = {
     },
     table: {
         user: 'User',
-        post: 'Post'
+        post: 'Post',
+        images: 'Images'
     },
     err_code: {
         'e0001': 'Database error',   // database error

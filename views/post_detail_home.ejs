@@ -1,0 +1,34 @@
+<div class="the-post">
+<% if (typeof result != "undefined"){ %>
+    <div class="post-pic">
+        <% if(result.post.type == 'image') { %>
+	        <img src="<%= result.post.featureImage %>" alt="" class="post-image">
+        <% } else { %>
+	        <img src="/img/yvDPJ8ZSmSVob7pRxIvU_IMG_40322-2000x1333.jpg" alt="" class="post-image">
+        <% } %>
+	</div>
+	<div class="cd-bio-content">
+	    <h1><%= result.post.title %></h1>
+		<div class="post-timeline-font cd-bio-body">
+			<p><p><%= result.post.content %></p></p>
+		</div>								
+		<div class="post-single-info">
+		    <strong>Published:</strong> <%= result.post.time %><br>
+			<strong>Filed under:</strong> 
+            <a href="http://demo.fuelpixels.com/tempo/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a><br>
+		</div>	
+        <% if(typeof result.images != "undefined"){ %>
+        <div class="filed-list">
+            <h3 id="reply-title" class="comment-reply-title">Danh sách Hình <small><a rel="nofollow" id="cancel-comment-reply-link" href="/tempo/wp-content/themes/tempo/loadpost.php?p=17#respond" style="display:none;">Cancel Reply</a></small></h3>
+            <% for (var i=0; i < result.images.length; i++){ %>
+                <div class="thumbnail">
+                    <img src="<%= result.images[i].url %>" /> 
+                </div>
+            <% } %>
+            <div style="clear: both" ></div>
+        </div>	
+        <% } %>
+	</div>
+</div>
+<% } %>
+</div>

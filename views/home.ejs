@@ -1,111 +1,81 @@
 <% layout('master_layout') -%>
 <main>
     <section id="timeline" class="cd-container">
-        <div class="timeline-block post-hidden">
-            <div class="timeline-img cd-standard is-hidden">									
-			    <span class="typcn typcn-pencil"></span>			
-		    </div>
-            <div class="timeline-content is-hidden">
-                <div class="loader">
-                    <div class="spinner">
-                    <div class="bounce1"></div>
-                    <div class="bounce2"></div>
-                    <div class="bounce3"></div>
-                    </div>										
-                </div>
-                <a href="#" class="post-link" data-id="34" data-permalink="http://demo.fuelpixels.com/tempo/?p=34" data-title="Sunset">
-                    <div class="post-player">
-                        <img src="http://demo.fuelpixels.com/tempo/wp-content/uploads/2014/07/6YrsyY9SqyuX0eAJaZGQ_pixel-debris-01-1000x500.jpg" alt="" style="width:100%">
-                    </div>
-                </a>
-                <div class="post-info">
-                    <a href="#" class="info-likes" data-id="34"><i class="fa fa-heart"></i> <span>24</span></a>
-					<a href="#" class="post-link info-comments" data-permalink="http://demo.fuelpixels.com/tempo/?p=34" data-title="Sunset" data-id="34"><i class="fa fa-comment"></i> <span>1</span></a>										
-					<div class="share atbe-share">
-						<span class="fa fa-share-alt"></span>
-						<div data-share-url="http://demo.fuelpixels.com/tempo/?p=34" data-share-title="Sunset" data-share-media="" data-share-excerpt="" class="atbe-share-box">
-							<div class="share-facebook fa fa-facebook"></div>
-							<div class="share-twitter fa fa-twitter"></div>
-							<div class="share-google-plus fa fa-google-plus"></div>
-							<div class="share-pinterest fa fa-pinterest"></div>
-						</div>
+		<% if(typeof result != "undefined"){ %>
+			<% for(var i=0; i< result.length; i++) { %>
+				<div class="timeline-block post-hidden">
+					<% if (result[i].type == 'image'){
+					%>
+					<div class="timeline-img cd-standard is-hidden">									
+						<span class="typcn typcn-pencil"></span>			
 					</div>
-                </div>
-                <a href="#" class="post-link" data-id="34" data-permalink="http://demo.fuelpixels.com/tempo/?p=34" data-title="Sunset">
-                    <h2>Sunset</h2>
-                </a>
-                <a href="#" class="post-link" data-id="34" data-permalink="http://demo.fuelpixels.com/tempo/?p=34" data-title="Sunset">
-                    <div class="post-timeline-font">
-                        <p>Tempo is carefully hand-coded and tested with the utmost attention to efficiency and standards. Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica. Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave.</p>
-                                
-                    </div>
-                </a>
-                <div class="clear"></div>			
-			    <div class="post-details">
-                    <strong>Categories</strong>: <a href="http://demo.fuelpixels.com/tempo/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a>   •   by admin			
-                </div>
-
-                <span class="cd-date">Jul 22</span>
-		    </div>	
-        </div>
-        <div class="timeline-block post-hidden">							
-	
-		<div class="timeline-img cd-standard is-hidden">									
-			<span class="typcn typcn-pencil"></span>			
-		</div>				
-		
-		<div class="timeline-content is-hidden">
-			<div class="loader">
-				<div class="spinner">
-				  <div class="bounce1"></div>
-				  <div class="bounce2"></div>
-				  <div class="bounce3"></div>
-				</div>										
-			</div>
-			
-							<a href="#" class="post-link" data-id="32" data-permalink="http://demo.fuelpixels.com/tempo/?p=32" data-title="Our trip to the Mountains">
-			
+					<% } else if (result[i].type == 'video') {%>
+					<div class="timeline-img cd-video is-hidden">									
+						<span class="typcn typcn-video"></span>			
+					</div>	
+					<% } else{ %>
+					<div class="timeline-img cd-image is-hidden">									
+						<span class="typcn typcn-image"></span>			
+					</div>	
+					<% } %>
+					<div class="timeline-content is-hidden">
+						<div class="loader">
+							<div class="spinner">
+							<div class="bounce1"></div>
+							<div class="bounce2"></div>
+							<div class="bounce3"></div>
+							</div>										
+						</div>
+						<% if (result[i].type == 'image'){
+						%>
 						<div class="post-player">
-						<img src="http://demo.fuelpixels.com/tempo/wp-content/uploads/2014/07/dHPUrXnHQeqfeuXCscUj_NZ14-391-of-589-1000x500.jpg" alt="" style="width:100%">
-			</div>
-			
-							</a>
-			
-			<div class="post-info">
-									<a href="#" class="info-likes" data-id="32"><i class="fa fa-heart"></i> <span>8</span></a>
-								<a href="#" class="post-link info-comments" data-permalink="http://demo.fuelpixels.com/tempo/?p=32" data-title="Our trip to the Mountains" data-id="32"><i class="fa fa-comment"></i> <span>0</span></a>										
-									<div class="share atbe-share">
-						<span class="fa fa-share-alt"></span>
-						<div data-share-url="http://demo.fuelpixels.com/tempo/?p=32" data-share-title="Our trip to the Mountains" data-share-media="" data-share-excerpt="" class="atbe-share-box">
-							<div class="share-facebook fa fa-facebook"></div>
-							<div class="share-twitter fa fa-twitter"></div>
-							<div class="share-google-plus fa fa-google-plus"></div>
-							<div class="share-pinterest fa fa-pinterest"></div>
+							<img src="<%= result[i].featureImage %>" alt="" style="width:100%">
 						</div>
-					</div>
+						<%	
+						} else{
+							%>
+						<a href="#" class="post-link" data-id="<%= result[i]._id %>" data-permalink="/post/<%= result[i]._id %>" data-title="Sunset">
+							<div class="post-player fuel-embed vimeo widescreen"><%- result[i].featureVideo %></div>
+						</a> 
+							<%
+						}%> 
+						
+						<div class="post-info">
+							<a href="#" class="info-likes" data-id="<%= result[i]._id %>"><i class="fa fa-heart"></i> <span>24</span></a>
+							<a href="#" class="post-link info-comments" data-permalink="/post/<%= result[i]._id %>" data-title="Sunset" data-id="34"><i class="fa fa-comment"></i> <span>1</span></a>										
+							<div class="share atbe-share">
+								<span class="fa fa-share-alt"></span>
+								<div data-share-url="/post/<%= result[i]._id %>" data-share-title="Sunset" data-share-media="" data-share-excerpt="" class="atbe-share-box">
+									<div class="share-facebook fa fa-facebook"></div>
+									<div class="share-twitter fa fa-twitter"></div>
+									<div class="share-google-plus fa fa-google-plus"></div>
+									<div class="share-pinterest fa fa-pinterest"></div>
+								</div>
 							</div>
+						</div>
+						<a href="/post/<%= result[i]._id %>" class="post-link" data-id="<%= result[i]._id %>" data-permalink="/post/<%= result[i]._id %>" data-title="Sunset">
+							<h2><%= result[i].title %></h2>
+						</a>
+						<a href="#" class="post-link" data-id="<%= result[i]._id %>" data-permalink="/post/<%= result[i]._id %>" data-title="Sunset">
+							<div class="post-timeline-font">
+								<p><%= result[i].content %></p>
+										
+							</div>
+						</a>
+						<div class="clear"></div>			
+						<div class="post-details">
+							<strong>Categories</strong>: <%= result[i].emotion %>			
+						</div>
 
-
-			<a href="#" class="post-link" data-id="32" data-permalink="http://demo.fuelpixels.com/tempo/?p=32" data-title="Our trip to the Mountains">
-				<h2>Our trip to the Mountains</h2>
-			</a>
-			
-			<a href="#" class="post-link" data-id="32" data-permalink="http://demo.fuelpixels.com/tempo/?p=32" data-title="Our trip to the Mountains">
-				<div class="post-timeline-font">
-					<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica. Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan High Life reprehenderit consectetur cupidatat kogi. Et leggings fanny pack, elit bespoke vinyl art party Pitchfork selfies master cleanse Kickstarter seitan retro. Drinking vinegar stumptown yr pop-up artisan sunt. Deep v cliche lomo biodiesel Neutra selfies.</p>
-							
+						<span class="cd-date"><%= result[i].time %></span>
+					</div>	
 				</div>
-			</a>
-
-			<div class="clear"></div>
-			
-			<div class="post-details">
-								<strong>Categories</strong>: <a href="http://demo.fuelpixels.com/tempo/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a>   •   by admin			</div>
-
-			<span class="cd-date">Jul 22</span>
-
-		</div>
-	
-</div>					
-    </section>				
+			<% } %>
+		<% } %> 
+        
+        					
+    </section>					
 </main>
+<a href="#0" class="post-button-close"><img src="http://demo.fuelpixels.com/tempo/wp-content/themes/tempo/img/close.svg" alt=""></a>
+	
+<div class="post-panel"></div>

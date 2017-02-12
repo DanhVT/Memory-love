@@ -13,6 +13,7 @@
         }
     </style>
     <script src="/js/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 <head>
 <body>
     <header>
@@ -20,7 +21,7 @@
         <a href="/admin">Back to Dashboard</a>
     </header>
     <div class="main">
-        <form name="addPostForm" action="addSubmit" method="post" id="addPostForm">
+        <form name="addPostForm" action="addSubmit" method="post" id="addPostForm" enctype="multipart/form-data">
             <p>
                 <label>Title:</label>
                 <input type="text" name="title" >
@@ -42,6 +43,18 @@
                     <option value="2">Sad</option>
                 </select>
             </p>
+            <p>
+                <label>Type:</label>
+                <input type="radio" name="type" value="image" checked> Image
+                <input type="radio" name="type" value="video"> Video
+                <input type="radio" name="type" value="other"> Other
+            </p>
+            <p>
+                <label>Feature:</label>
+                <input type="file" name="featureImage" />
+                <input type="text" name="featureVideo" placeholder="Link video or other" style="display:none"/>
+            </p>
+            
             <p>
                 <input type="submit" value="Add" name="add" style="padding:10px; background:#71cf12">
                 <input type="hidden" id="idPost" />

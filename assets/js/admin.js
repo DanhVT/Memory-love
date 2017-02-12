@@ -4,15 +4,12 @@ jQuery(document).ready(function ($) {
         var $form = $(this),
             url = $form.attr('action'),
             method = $form.attr('method');
+        $form.ajaxSubmit({
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
 
-        var data = $form.serialize();
-
-        $.ajax({
-            type: method,
-            url: url,
-            data: data
-        })
-            .success(function (data) {
+            success: function(data) {
                 console.log(data);
                 var resultResponse = $(".resultResponse");
                 if (data.state == "error") {
@@ -26,11 +23,22 @@ jQuery(document).ready(function ($) {
                     $form.fadeOut('slow');
                     $(".uploadPanel").fadeIn('fast');
                 }
-            })
-            .error(function (error) {
-                console.log(error)
-            })
+            }
+        });
+    });
 
+    $('input[type=radio][name=type]').change(function() {
+        if (this.value == 'image') {
+            $("input[type=file][name=featureImage]").show();
+            $("input[type=text][name=featureVideo]").hide();
+        }
+        else if(this.value == 'video'){
+            $("input[type=file][name=featureImage]").hide();
+            $("input[type=text][name=featureVideo]").show();
+        }
+        else{
+
+        }
     });
 
     $('.upload-btn').on('click', function () {
@@ -42,6 +50,7 @@ jQuery(document).ready(function ($) {
 
         var files = $(this).get(0).files;
         var postId = $("#idPost").val();
+        console.log(postId)
         if (files.length > 0) {
             // create a FormData object which will be sent as the data payload in the
             // AJAX request
@@ -54,14 +63,14 @@ jQuery(document).ready(function ($) {
                 formData.append('uploads[]', file, file.name);
             }
             $.ajax({
-                url: 'addImagesSubmit',
+                url: '/admin/addImagesSubmit',
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function (data) {
                     console.log(data);
-                    $(".uploadedImage").append("<img src='"+ data.result + "' alt=''/>")
+                    $(".uploadedImage").append("<img src='"+ data.result + "' alt='Yeu em' />")
                 },
                 xhr: function () {
                     // create an XMLHttpRequest
@@ -90,5 +99,33 @@ jQuery(document).ready(function ($) {
                 }
             });
         }
+    })
+    $(".remove").click(function(){
+        var row = $(this).closest("tr");
+        var id = $(this).attr("data-id");
+        row.fadeOut("slow");
+        $.ajax({
+            url: "admin/deletePost",
+            method: "POST",
+            data: { id: id}
+        })
+        .success(function(data){
+            if(data.state == "success")
+                alert("Delete success");
+        })
+    });
+    $(".delete_image").click(function(){
+        var row = $(this).closest(".image");
+        var id = $(this).attr("data-id");
+        row.fadeOut("slow");
+        $.ajax({
+            url: "/admin/deleteImage",
+            method: "POST",
+            data: { id: id}
+        })
+        .success(function(data){
+            if(data.state == "success")
+                alert("Delete success");
+        })
     })
 });

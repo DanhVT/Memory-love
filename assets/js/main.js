@@ -67,8 +67,9 @@ jQuery(document).ready(function($){
 		loader.fadeIn('fast');
 		//load post
 		$.ajax({
-		  url: theme_url + '/loadpost.php?p=' + postid,
+		  url: '/post/' + postid,
 		  success: function(data) {
+			  console.log(data)
 		  		$('.post-panel').html(data);
 		  		$('.post-image').get(0).onload = openPost; 
 		  		//change the url

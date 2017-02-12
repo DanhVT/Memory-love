@@ -6,17 +6,52 @@
     <script src="/js/jquery.js"></script>
 <head>
 <body>
-    <header>
-        <h1>Dashboard <a href="/logout">Logout</a></h1>
-        <a href="/admin/add">Add post</a>
-    </header>
-    <div class="main">
-        
-        
-        <div class="block">
-            
+    <div class="wrap">
+        <sidebar>
+            <h1>Dashboard <a href="/logout">Logout</a></h1>
+            <a href="/">Back to Home</a>
+            <hr>
+            <a href="/admin/add">Add post</a>
+        </sidebar>
+        <div class="main">       
+            <div class="block">
+                <% if(typeof result !== "undefined") { %>
+                    <table border="1" width="100%">
+                        <thead>
+                            <th>No</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Emotion</th>
+                            <th>Time</th>
+                            <th>Feature</th>
+                            <th>&nbsp;</th>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i< result.length; i++) { %>
+                                <tr>
+                                    <td><%= i %></td>
+                                    <td><a href="/admin/post/<%= result[i]._id %>" ><%= result[i].title %></a></td>
+                                    <td><%= result[i].content %></td>
+                                    <td><%= result[i].emotion %></td>
+                                    <td><%= result[i].time %></td>
+                                    <td>
+                                        <% if (result[i].type == 'image') {%>
+                                        <img src="<%= result[i].featureImage %>" style="width:40px"/></td>
+                                        <% }else{ %>
+                                        <%- result[i].featureVideo %>
+                                        <%  }  %>
+                                    <td>
+                                        <button class="remove" data-id="<%= result[i]._id %>"> -X- </button>
+                                    </td> 
+                                </tr>
+                            <% } %>
+                        </tbody>             
+                    </table>
+                <% } %>
+                </div>
+            </div>  
         </div>
-    </div>  
+    
     <script src="/js/admin.js"></script>
 </body>
 </html>
