@@ -26,11 +26,14 @@
 							<div class="bounce3"></div>
 							</div>										
 						</div>
-						<% if (result[i].type == 'image'){
-						%>
+						<% if (result[i].type == 'image'){	%>
 						<div class="post-player">
 							<img src="<%= result[i].featureImage %>" alt="" style="width:100%">
 						</div>
+						<% }else if (result[i].type == 'other'){	%>
+							<div class="post-player">
+								<img src="<%= result[i].featureImage %>" alt="" style="width:100%">
+							</div>				
 						<%	
 						} else{
 							%>
