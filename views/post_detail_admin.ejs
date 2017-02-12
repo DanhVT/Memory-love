@@ -26,7 +26,10 @@
                         </div>
                     <% } %>
                     <div style="clear:both"></div>
-                <div class="block uploadPanel" style="display:block">
+                
+                </div>  
+            <% }   
+            <div class="block uploadPanel" style="display:block">
                     <div class="uploadedImage">
                     
                     </div>
@@ -37,8 +40,6 @@
                 </div>
                 <input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
                 <input type="hidden" id="idPost" value="<%= result.post._id %>"/>
-                </div>  
-            <% }   
          } %>    
 
     </div>
